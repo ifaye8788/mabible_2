@@ -3,9 +3,14 @@
 import React from 'react'
 import { Grid, GridItem } from '@chakra-ui/react'
 import Navigation from "@/components/Navigation";
-import NoteForm from "@/components/NoteForm";
+import UpdateNote from "@/components/UpdateNote";
+import { useRouter } from 'next/navigation'
+//import { useRouter } from 'next/router'
 
-const NoteFormPage = () => {
+
+const EditNote = (editNote) => {
+    const router = useRouter();
+    console.log('EditNote router = ', router);
 
     return (
         <>
@@ -27,7 +32,7 @@ const NoteFormPage = () => {
 
                     </GridItem>
                     <GridItem pl='2' bg='white.300' area={'footer'}>
-                        <NoteForm />
+                        <UpdateNote note={editNote} />
                     </GridItem>
                 </Grid>
             </div>
@@ -35,5 +40,4 @@ const NoteFormPage = () => {
     )
 }
 
-export default NoteFormPage
-
+export default EditNote

@@ -25,8 +25,8 @@ export const useNoteContext = () => {
   return context;
 };
 
-//export const NoteProvider = ({ children }) => {
-export const NoteProvider: React.FC = ({ children }) => {
+export const NoteProvider = ({ children }) => {
+//export const NoteProvider: React.FC = ({ children }) => {
   const [notes, setNotes] = useState<Note[]>([]);
 
   useEffect(() => {
@@ -43,9 +43,10 @@ export const NoteProvider: React.FC = ({ children }) => {
         setNotes(parsedNotes);
         console.log('NoteProvider useEffect 111 : notes = ', notes);
       })
-      .catch(error => console.error('Error fetching notes:', error));*/
+      .catch(error => console.error('Error fetching notes:', error));
 
-      console.log('NoteProvider useEffect 222 : notes = ', notes);
+      console.log('NoteProvider useEffect 222 : notes = ', notes);*/
+  //}, [notes]);
   }, []);
 
   const addNote = (note: Note) => {
@@ -56,7 +57,7 @@ export const NoteProvider: React.FC = ({ children }) => {
       body: JSON.stringify({
         title: note.title,
         body: note.body,
-        userId: 1, // Hardcoded for simplicity
+        userId: 1, 
       }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
@@ -65,8 +66,9 @@ export const NoteProvider: React.FC = ({ children }) => {
       .then(response => response.json())
       .then(data => {
         console.log('NoteProvider addNote : notes = ', notes);
+        console.log('NoteProvider addNote : data = ', data);
         const newNote = {
-          id: data.id,
+          id: data.id + note.id, //data.id toujours égal à 101
           title: data.title,
           body: data.body,
           createdAt: new Date(data.createdAt),
@@ -86,7 +88,7 @@ export const NoteProvider: React.FC = ({ children }) => {
         id: updatedNote.id,
         title: updatedNote.title,
         body: updatedNote.body,
-        userId: 1, // Hardcoded for simplicity
+        userId: 1, 
       }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',

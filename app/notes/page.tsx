@@ -5,12 +5,12 @@ import Header from '../../components/Header';
 import { Grid, GridItem } from '@chakra-ui/react'
 import Navigation from "@/components/Navigation";
 import { useNoteContext } from '../../contexts/NoteContext';
-
-
+import { useRouter } from 'next/navigation'
 
 const NotesPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const { notes, deleteNote, updateNote } = useNoteContext();
+  const router = useRouter();
 
   console.log('NotesPage : notes = ', notes);
 
@@ -21,7 +21,8 @@ const NotesPage = () => {
   );
 
   const handleUpdateNote = (updatedNote: Note) => {
-    updateNote(updatedNote);
+    //updateNote(updatedNote);
+    router.push('/edit', updatedNote);
   };
 
   const handleDeleteNote = (id: number) => {
@@ -34,23 +35,26 @@ const NotesPage = () => {
     <>
       <div>
         <Grid
-          templateAreas={`"header header"
-          "nav main"
-          "nav footer"`}
-          gridTemplateRows={'50px 30px'}
+          templateAreas={`
+                  "nav main header"
+                  "nav footer header"`}
+          gridTemplateRows={'50px 1fr 30px'}
           gridTemplateColumns={'150px 1fr'}
-          h='200px'
+          h='600px'
           gap='1'
           color='blackAlpha.700'
           fontWeight='bold'
         >
-          <GridItem pl='2' bg='pink.300' area={'nav'}>
+          <GridItem pl='2' bg='white.300' area={'header'}>
+
+          </GridItem>
+          <GridItem pl='2' bg='white.300' area={'nav'}>
             <Navigation />
           </GridItem>
-          <GridItem pl='2' bg='green.300' area={'main'}>
+          <GridItem pl='2' bg='white.300' area={'main'}>
             <Header title="Notes" onSearchChange={setSearchTerm} />
           </GridItem>
-          <GridItem pl='2' bg='blue.300' area={'footer'}>
+          <GridItem pl='2' bg='white.300' area={'footer'}>
             <NoteList notes={filteredNotes} onUpdateNote={handleUpdateNote} onDeleteNote={handleDeleteNote} />
           </GridItem>
         </Grid>

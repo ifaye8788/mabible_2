@@ -12,17 +12,18 @@ import { useNoteContext } from '../contexts/NoteContext';
 import { useRouter } from 'next/navigation'
 
 
-const NoteForm = () => {
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
-  const { notes, addNote } = useNoteContext();
+const UpdateNote = (note) => {
+  
+  const { notes, updateNote } = useNoteContext();
+  const [title, setTitle] = useState(note.title);
+  const [body, setBody] = useState(note.body);
   const router = useRouter();
 
 
-  const handleAddNote = () => {
+  const handleUpdateNote = () => {
     console.log('NoteForm handleAddNote : ENTER ');
-    addNote({
-      id: Math.floor(Math.random() * 101), 
+    updateNote({
+      id: note.id, 
       title,
       body,
       createdAt: new Date(),
@@ -42,11 +43,11 @@ const NoteForm = () => {
       <FormLabel>Contenu de la note</FormLabel>
       <Textarea value={body} onChange={(e) => setBody(e.target.value)} />
     </FormControl>
-    <Button colorScheme="teal" mt={4} onClick={handleAddNote}>
-      Ajouter la note
+    <Button colorScheme="teal" mt={4} onClick={handleUpdateNote}>
+      Mettre à jour la note
     </Button>
   </Box>
   );
 };
 
-export default NoteForm;
+export default UpdateNote;
