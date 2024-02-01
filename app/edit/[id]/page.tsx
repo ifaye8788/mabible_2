@@ -5,12 +5,15 @@ import { Grid, GridItem } from '@chakra-ui/react'
 import Navigation from "@/components/Navigation";
 import UpdateNote from "@/components/UpdateNote";
 import { useRouter } from 'next/navigation'
-//import { useRouter } from 'next/router'
+import { useNoteContext } from '../../../contexts/NoteContext';
 
 
-const EditNote = (editNote) => {
+const EditNote = ({ params }) => {
     const router = useRouter();
-    console.log('EditNote router = ', router);
+    const { notes } = useNoteContext();
+
+    // finding the object whose id is 'params.id'
+    const note = notes.find((note) => note.id == params.id);
 
     return (
         <>
@@ -32,7 +35,7 @@ const EditNote = (editNote) => {
 
                     </GridItem>
                     <GridItem pl='2' bg='white.300' area={'footer'}>
-                        <UpdateNote note={editNote} />
+                        <UpdateNote note={note} />
                     </GridItem>
                 </Grid>
             </div>

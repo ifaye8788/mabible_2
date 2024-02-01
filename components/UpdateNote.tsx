@@ -12,8 +12,8 @@ import { useNoteContext } from '../contexts/NoteContext';
 import { useRouter } from 'next/navigation'
 
 
-const UpdateNote = (note) => {
-  
+const UpdateNote = ({note}) => {
+  console.log('UpdateNote note = ', note);
   const { notes, updateNote } = useNoteContext();
   const [title, setTitle] = useState(note.title);
   const [body, setBody] = useState(note.body);
@@ -21,7 +21,7 @@ const UpdateNote = (note) => {
 
 
   const handleUpdateNote = () => {
-    console.log('NoteForm handleAddNote : ENTER ');
+    console.log('UpdateNote handleUpdateNote : ENTER ');
     updateNote({
       id: note.id, 
       title,

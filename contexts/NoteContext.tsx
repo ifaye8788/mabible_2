@@ -26,27 +26,10 @@ export const useNoteContext = () => {
 };
 
 export const NoteProvider = ({ children }) => {
-//export const NoteProvider: React.FC = ({ children }) => {
   const [notes, setNotes] = useState<Note[]>([]);
 
   useEffect(() => {
-    // Fetch initial notes from JSONPlaceholder API
-    /*fetch('https://jsonplaceholder.typicode.com/posts')
-      .then(response => response.json())
-      .then(data => {
-        const parsedNotes = data.map((note: any) => ({
-          id: note.id,
-          title: note.title,
-          body: note.body,
-          createdAt: new Date(note.createdAt), // Parse createdAt as Date
-        }));
-        setNotes(parsedNotes);
-        console.log('NoteProvider useEffect 111 : notes = ', notes);
-      })
-      .catch(error => console.error('Error fetching notes:', error));
-
-      console.log('NoteProvider useEffect 222 : notes = ', notes);*/
-  //}, [notes]);
+    
   }, []);
 
   const addNote = (note: Note) => {
@@ -82,7 +65,8 @@ export const NoteProvider = ({ children }) => {
 
   const updateNote = (updatedNote: Note) => {
     // Update note on JSONPlaceholder API
-    fetch(`https://jsonplaceholder.typicode.com/posts/${updatedNote.id}`, {
+    //fetch(`https://jsonplaceholder.typicode.com/posts/${updatedNote.id}`, {
+    fetch(`https://jsonplaceholder.typicode.com/posts/1`, {
       method: 'PUT',
       body: JSON.stringify({
         id: updatedNote.id,

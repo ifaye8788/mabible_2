@@ -5,14 +5,10 @@ import Header from '../../components/Header';
 import { Grid, GridItem } from '@chakra-ui/react'
 import Navigation from "@/components/Navigation";
 import { useNoteContext } from '../../contexts/NoteContext';
-import { useRouter } from 'next/navigation'
 
 const NotesPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const { notes, deleteNote, updateNote } = useNoteContext();
-  const router = useRouter();
-
-  console.log('NotesPage : notes = ', notes);
 
   const filteredNotes = notes.filter(
     note =>
@@ -21,8 +17,8 @@ const NotesPage = () => {
   );
 
   const handleUpdateNote = (updatedNote: Note) => {
-    //updateNote(updatedNote);
-    router.push('/edit', updatedNote);
+    console.log('NotesPage : handleUpdateNote ENTER ');
+    console.log('NotesPage : handleUpdateNote updatedNote = ', updatedNote);
   };
 
   const handleDeleteNote = (id: number) => {
